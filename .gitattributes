@@ -1,0 +1,8 @@
+*.graphql linguist-detectable=true
+*.graphql linguist-language=GraphQL
+
+*.gql linguist-detectable=true
+*.gql linguist-language=GraphQL
+
+*.graphqls linguist-detectable=true
+*.graphqls linguist-language=GraphQL
