@@ -15,3 +15,11 @@ query {
     subtitle
   }
 }
+
+#* SQL: select firstName, lastName from users; -> below equivalent in graphQL
+query {
+  users {
+    firstName
+    lastName
+  }
+}
