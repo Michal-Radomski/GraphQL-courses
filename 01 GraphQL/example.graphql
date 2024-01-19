@@ -1,8 +1,17 @@
+# Example query
 query HeroNameAndFriends($episode: Episode) {
   hero(episode: $episode) {
     name
     friends {
       name
     }
+  }
+}
+
+query {
+  books {
+    id
+    title
+    subtitle
   }
 }
