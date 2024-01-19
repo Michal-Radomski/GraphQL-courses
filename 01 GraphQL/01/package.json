@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "start": "nodemon index.ts 'query { hello }'"
+    "start": "nodemon index.ts 'query { hello name }'"
   },
   "keywords": [],
   "author": "",

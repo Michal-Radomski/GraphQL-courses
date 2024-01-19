@@ -7,12 +7,14 @@ schema {
 }
 type Query {
   hello: String
+  name: String
 }
 `;
 
 const resolvers = {
   Query: {
     hello: () => "World!",
+    name: () => "Michal",
   },
 };
 
