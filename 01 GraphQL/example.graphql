@@ -24,6 +24,7 @@ query {
   }
 }
 
+# Primitives + Objects
 query {
   books {
     title
@@ -54,6 +55,36 @@ query {
         firstName # String / Scalar type
         lastName # String / Scalar type
       }
+    }
+  }
+}
+
+# Query parameters - position not important!
+query {
+  reviews(page: 1, first: 2) {
+    rating
+    comment
+    status
+  }
+}
+
+query {
+  reviews(id: ID) {
+    # ID! -> not null value!
+    rating
+    comment
+    status
+  }
+}
+
+query {
+  reviews(status: [FLAGGED]) {
+    rating
+    comment
+    status
+    user {
+      firstName
+      lastName
     }
   }
 }
