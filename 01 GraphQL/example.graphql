@@ -23,3 +23,37 @@ query {
     lastName
   }
 }
+
+query {
+  books {
+    title
+    authors {
+      firstName
+      lastName
+    }
+    reviews {
+      user {
+        firstName
+        lastName
+      }
+      rating
+      comment
+    }
+  }
+}
+
+query {
+  books {
+    # Book / Object type
+    title # String / Scalar type
+    reviews {
+      # List of Review / Object types
+      rating # Int / Scalar type
+      user {
+        # Person / Object type
+        firstName # String / Scalar type
+        lastName # String / Scalar type
+      }
+    }
+  }
+}
