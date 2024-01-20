@@ -112,3 +112,41 @@ query BooksQuery($page: Int, $first: Int) {
 }
 
 # Interfaces
+interface Inventory {
+  id: ID!
+  name: String
+  description: String
+  price: Int
+}
+
+type Food implements Inventory {
+  Calories: Int
+  Carbs: Int
+  Fat: Int
+}
+
+# Aliases & Fragments
+interface Book {
+  title: String
+  subtitle: String
+  description: String
+  pageCount: Int
+  rating: Int
+}
+
+fragment BookFields on Book {
+  title
+  subtitle
+  description
+  pageCount
+  rating
+}
+
+query TwoBooks {
+  book1: book(id: "1") {
+    ...BookFields
+  }
+  book2: book(id: "1") {
+    ...BookFields
+  }
+}
