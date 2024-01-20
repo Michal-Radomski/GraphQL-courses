@@ -150,3 +150,57 @@ query TwoBooks {
     ...BookFields
   }
 }
+
+fragment UserFragment on User {
+  firstName
+  lastName
+}
+
+query TwoUserQuery {
+  user1: user(id: "1") {
+    ...UserFragment
+  }
+  user2: user(id: "2") {
+    ...UserFragment
+  }
+}
+
+# UnioTypes
+union SearchResult = Author | Book | Review
+
+query SearchQuery {
+  search(term: "Dan") {
+    __typename
+    ... on Book {
+      title
+      subtitle
+      authors {
+        firstName
+        lastName
+      }
+    }
+    ... on Author {
+      firstName
+      lastName
+      books {
+        title
+      }
+    }
+    ... on User {
+      firstName
+      lastName
+      reviews {
+        book {
+          title
+        }
+      }
+    }
+    ... on Review {
+      rating
+      comment
+      book {
+        title
+      }
+    }
+  }
+}
