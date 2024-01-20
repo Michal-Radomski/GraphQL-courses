@@ -88,3 +88,27 @@ query {
     }
   }
 }
+
+# Variables
+query ModeratorReviews($status: [ReviewsStatus!]) {
+  reviews(status: $status) {
+    rating
+    comment
+    status
+    user {
+      firstName
+      lastName
+    }
+  }
+}
+
+query BooksQuery($page: Int, $first: Int) {
+  books(page: $page, first: $first) {
+    id
+    title
+    pageCount
+    rating
+  }
+}
+
+# Interfaces
