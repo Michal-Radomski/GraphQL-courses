@@ -204,3 +204,57 @@ query SearchQuery {
     }
   }
 }
+
+# Directives
+query BookReview($status: [ReviewStatus!], $includeUser: Boolean!) {
+  reviews(status: $status) {
+    id
+    status
+    comment
+    rating
+    user @include(if: $includeUser) {
+      firstName
+      lastName
+    }
+  }
+}
+
+query Books($skipReviews: Boolean!) {
+  books {
+    title
+    subtitle
+    id
+    reviews @skip(if: $skipReviews) {
+      comment
+      rating
+    }
+  }
+}
+
+# Mutations and Input Types
+$bookInput = {
+  title: "", subtitle: "", description: "", pageCount: 100
+}
+
+mutation AddBook {
+  addBook(bookInput: $bookInput) {
+
+  }
+}
+mutation AddUser{
+  addUser(user:{firstName: "James", lastName:"Moore"}){
+    id
+    firstName
+    lastName
+  }
+}
+
+query Users{
+  user(id:45){
+    id
+    firstName
+    lastName
+  }
+}
+
+# Errors: can be errors and answers in one respond!
