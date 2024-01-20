@@ -232,29 +232,20 @@ query Books($skipReviews: Boolean!) {
 }
 
 # Mutations and Input Types
-$bookInput = {
-  title: "", subtitle: "", description: "", pageCount: 100
-}
-
-mutation AddBook {
-  addBook(bookInput: $bookInput) {
-
-  }
-}
-mutation AddUser{
-  addUser(user:{firstName: "James", lastName:"Moore"}){
+mutation AddUser {
+  addUser(user: { firstName: "James", lastName: "Moore" }) {
     id
     firstName
     lastName
   }
 }
 
-query Users{
-  user(id:45){
+query Users {
+  user(id: 45) {
     id
     firstName
     lastName
   }
 }
 
-# Errors: can be errors and answers in one respond!
+# *Errors: can be errors and answers in one respond!
