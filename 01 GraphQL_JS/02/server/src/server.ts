@@ -1,32 +1,74 @@
-import { graphql } from "graphql";
+import path from "path";
+import http from "http";
+
+import express, { Express, Request, Response } from "express";
+import cors from "cors";
+import bodyParser from "body-parser";
+import morgan from "morgan";
+
 import { makeExecutableSchema } from "@graphql-tools/schema";
+import { ApolloServer, BaseContext } from "@apollo/server";
+import { expressMiddleware } from "@apollo/server/express4";
+import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHttpServer";
 
-const typeDefs = `
-schema {
-  query: Query
-}
-type Query {
-  hello: String
-  name: String
-}
-`;
+(async function expressGraphQLServer() {
+  // The GraphQL schema
+  const typeDefs = `
+  schema {
+    query: Query
+  }
+  type Query {
+    hello: String
+    name: String
+  }
+  `;
 
-const resolvers = {
-  Query: {
-    hello: () => "World!",
-    name: () => "Michal",
-  },
-};
+  // A map of functions which return data for the schema
+  const resolvers = {
+    Query: {
+      hello: () => "World!",
+      name: () => "Michal",
+    },
+  };
 
-const schema = makeExecutableSchema({ typeDefs, resolvers });
+  const schema = await makeExecutableSchema({ typeDefs, resolvers });
 
-const query = process.argv[2];
-// console.log("process:", process);
-// console.log({ query });
-// console.log("process.argv:", process.argv);
-// console.log("process.argv[2]:", process.argv[2]);
+  //* The server
+  const app: Express = express();
+  const httpServer = await http.createServer(app);
 
-graphql({ schema, source: query }).then((result) => {
-  console.log(JSON.stringify(result, null, 2));
-  // console.log(JSON.stringify(result));
-});
+  // Set up Apollo Server
+  const server = new ApolloServer({
+    schema,
+    plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
+  });
+  await server.start();
+
+  //* Middlewares
+  await app.use(
+    "/graphql",
+    cors(),
+    morgan("combined"),
+    bodyParser.json(),
+    bodyParser.urlencoded({ extended: true }),
+    expressMiddleware(server as ApolloServer<BaseContext>)
+  );
+
+  //* Favicon
+  await app.get("/favicon.ico", (_req: Request, res: Response) => {
+    res.sendFile(path.join(__dirname + "/favicon.svg"));
+  });
+  //* Test route
+  await app.get("/", (req: Request, res: Response) => {
+    console.log("req.ip:", req.ip);
+    res.send("<h1 style='color:blue;text-align:center'>API is running</h1>");
+  });
+
+  //* Port
+  const portHTTP = (process.env.PORT || 5000) as number;
+
+  await new Promise<void>((resolve) => httpServer.listen({ port: portHTTP }, resolve));
+  console.log(`Server is listening at http://localhost:${portHTTP}`);
+  // For testing only
+  console.log("Current Time:", new Date().toLocaleTimeString());
+})();
