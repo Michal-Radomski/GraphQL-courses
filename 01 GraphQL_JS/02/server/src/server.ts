@@ -18,6 +18,7 @@ import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHt
     query: Query
   }
   type Query {
+    # test query
     hello: String
     name: String
   }
@@ -44,15 +45,11 @@ import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHt
   });
   await server.start();
 
-  //* Middlewares
-  await app.use(
-    "/graphql",
-    cors(),
-    morgan("combined"),
-    bodyParser.json(),
-    bodyParser.urlencoded({ extended: true }),
-    expressMiddleware(server as ApolloServer<BaseContext>)
-  );
+  //* Middlewares: Global
+  await app.use(cors(), morgan("combined"), bodyParser.json(), bodyParser.urlencoded({ extended: true }));
+
+  //* Middlewares: GraphQL
+  await app.use("/graphql", expressMiddleware(server as ApolloServer<BaseContext>));
 
   //* Favicon
   await app.get("/favicon.ico", (_req: Request, res: Response) => {
