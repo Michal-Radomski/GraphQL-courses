@@ -11,27 +11,11 @@ import { ApolloServer, BaseContext } from "@apollo/server";
 import { expressMiddleware } from "@apollo/server/express4";
 import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHttpServer";
 
+import typeDefs from "./typeDefs";
+import resolvers from "./resolvers";
+import { pool } from "./db";
+
 (async function expressGraphQLServer() {
-  // The GraphQL schema
-  const typeDefs = `
-  schema {
-    query: Query
-  }
-  type Query {
-    # test query
-    hello: String
-    name: String
-  }
-  `;
-
-  // A map of functions which return data for the schema
-  const resolvers = {
-    Query: {
-      hello: () => "World!",
-      name: () => "Michal",
-    },
-  };
-
   const schema = await makeExecutableSchema({ typeDefs, resolvers });
 
   //* The server
@@ -60,6 +44,14 @@ import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHt
     console.log("req.ip:", req.ip);
     res.send("<h1 style='color:blue;text-align:center'>API is running</h1>");
   });
+
+  //* PostgresQL DB
+  pool
+    .connect()
+    .then(() => {
+      console.log("Connected to the PostgreSQL DB successfully...");
+    })
+    .catch((error) => console.error({ error }));
 
   //* Port
   const portHTTP = (process.env.PORT || 5000) as number;
