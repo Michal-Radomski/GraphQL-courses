@@ -12,14 +12,22 @@ export const pool = new Pool({
   password: process.env.password,
 });
 
-async function query(sql: string, params: any[]) {
+function logQuery(sql: string, params: string[]) {
+  console.log("BEGIN-------------------------------------");
+  console.log("SQL:", sql);
+  console.log("PARAMS:", JSON.stringify(params));
+  console.log("END---------------------------------------");
+}
+
+async function query(sql: string, params: string[]) {
   const client = await pool.connect();
+  logQuery(sql, params);
   try {
     const result = await client.query(sql, params);
     const rows = humps.camelizeKeys(result.rows);
     return { ...result, rows };
   } catch (err) {
-    console.log(err);
+    console.log({ err });
   } finally {
     client.release();
   }
