@@ -10,7 +10,7 @@ export const pool = new Pool({
   password: process.env.password,
 });
 
-async function query(sql: string, params: any) {
+async function query(sql: string, params: any[]) {
   const client = await pool.connect();
   try {
     return client.query(sql, params);

@@ -249,3 +249,13 @@ query Users {
 }
 
 # *Errors: can be errors and answers in one respond!
+
+query Books {
+  books {
+    id
+    title
+    description
+    imageUrl
+    rating
+  }
+}
