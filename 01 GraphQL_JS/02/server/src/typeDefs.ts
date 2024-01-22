@@ -12,6 +12,8 @@ type Book {
   description: String!
   imageUrl: String!
   rating: Float
+  subTitle: String
+  ratingCount: Int
 }
 `;
 

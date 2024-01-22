@@ -1,5 +1,7 @@
 import * as dotenv from "dotenv";
 dotenv.config();
+import humps from "humps";
+
 import { Pool } from "pg";
 
 export const pool = new Pool({
@@ -13,7 +15,9 @@ export const pool = new Pool({
 async function query(sql: string, params: any[]) {
   const client = await pool.connect();
   try {
-    return client.query(sql, params);
+    const result = await client.query(sql, params);
+    const rows = humps.camelizeKeys(result.rows);
+    return { ...result, rows };
   } catch (err) {
     console.log(err);
   } finally {
