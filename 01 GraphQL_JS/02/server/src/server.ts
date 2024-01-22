@@ -7,15 +7,18 @@ import bodyParser from "body-parser";
 import morgan from "morgan";
 
 import { makeExecutableSchema } from "@graphql-tools/schema";
-import { ApolloServer, BaseContext } from "@apollo/server";
+import { ApolloServer } from "@apollo/server";
 import { expressMiddleware } from "@apollo/server/express4";
 import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHttpServer";
 
 import typeDefs from "./typeDefs";
 import resolvers from "./resolvers";
 import { pool } from "./db";
+import loaders from "./loader";
 
 (async function expressGraphQLServer() {
+  // console.log("loaders:", loaders);
+
   const schema = await makeExecutableSchema({ typeDefs, resolvers });
 
   //* The server
@@ -33,7 +36,12 @@ import { pool } from "./db";
   await app.use(cors(), morgan("combined"), bodyParser.json(), bodyParser.urlencoded({ extended: true }));
 
   //* Middlewares: GraphQL
-  await app.use("/graphql", expressMiddleware(server as ApolloServer<BaseContext>));
+  await app.use(
+    "/graphql",
+    expressMiddleware(server, {
+      context: async () => ({ loaders: loaders() }),
+    })
+  );
 
   //* Favicon
   await app.get("/favicon.ico", (_req: Request, res: Response) => {

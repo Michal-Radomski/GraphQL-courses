@@ -1,10 +1,10 @@
-import { groupBy, map } from "ramda";
+import * as R from "ramda";
 import DataLoader from "dataloader";
 
 import query from "./db";
 
-export async function findAuthorsByBookIds(ids: any) {
-  console.log("ids:", ids);
+export async function findAuthorsByBookIds(ids: string[]) {
+  // console.log("ids:", ids);
 
   const sql = `
   select 
@@ -17,8 +17,8 @@ export async function findAuthorsByBookIds(ids: any) {
   const params = [ids];
   try {
     const result = await query(sql, params);
-    const rowsById = (groupBy as any)((author: { bookId: string }) => author.bookId, result?.rows);
-    return map((id: string) => rowsById[id], ids);
+    const rowsById = (R.groupBy as any)((author: { bookId: string }) => author.bookId, result?.rows);
+    return R.map((id: string) => rowsById[id], ids);
   } catch (err) {
     console.log({ err });
     throw err;
@@ -29,7 +29,7 @@ export function findAuthorsByBookIdsLoader() {
   return new DataLoader(findAuthorsByBookIds as any);
 }
 
-export async function authorsByBookId(id: string) {
+export async function authorsByBookId(id: string[]) {
   const sql = `
   select 
   hb.author.*
