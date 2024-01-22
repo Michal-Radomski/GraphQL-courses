@@ -1,0 +1,23 @@
+query BooksQuery {
+  books {
+    id
+    title
+    description
+    imageUrl
+    rating
+    subtitle
+    ratingCount
+    authors {
+      name
+    }
+  }
+}
+
+query ReviewQuery {
+  reviews {
+    id
+    rating
+    title
+    comment
+  }
+}

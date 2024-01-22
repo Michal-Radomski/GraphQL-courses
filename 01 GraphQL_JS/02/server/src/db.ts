@@ -19,7 +19,7 @@ export const pool = new Pool({
 //   console.log("END---------------------------------------");
 // }
 
-async function query(sql: string, params: string[][]) {
+async function query(sql: string, params?: string[][]) {
   // console.log("params:", params);
   const client = await pool.connect();
   // logQuery(sql, params);
