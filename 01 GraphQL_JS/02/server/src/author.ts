@@ -14,7 +14,9 @@ export async function findAuthorsByBookIds(ids: string[]) {
     on hb.author.id = hb.book_author.author_id
   where hb.book_author.book_id = ANY($1);
   `;
+
   const params = [ids];
+
   try {
     const result = await query(sql, params);
     const rowsById = (R.groupBy as any)((author: { bookId: string }) => author.bookId, result?.rows);
@@ -37,7 +39,9 @@ export async function authorsByBookId(id: string[]) {
     on hb.author.id = hb.book_author.author_id
   where hb.book_author.book_id = $1;
   `;
+
   const params = [id];
+
   try {
     const result = await query(sql, params);
     return result?.rows;

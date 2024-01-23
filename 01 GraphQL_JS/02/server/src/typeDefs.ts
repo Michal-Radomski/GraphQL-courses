@@ -5,8 +5,16 @@ schema {
 }
 
 type Query {
-  books: [Book]
-  reviews: [Review]
+  books(orderBy: BooksOrderBy = RATING_DESC): [Book]
+  reviews(orderBy: ReviewsOrderBy = ID_DESC): [Review]
+}
+enum ReviewsOrderBy {
+  ID
+  ID_DESC
+}
+enum BooksOrderBy {
+  RATING_DESC
+  ID_DESC
 }
 
 type Review {

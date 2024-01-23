@@ -49,3 +49,53 @@ query HomePage {
     }
   }
 }
+
+query {
+  books(orderBy: ID_DESC) {
+    id
+    title
+    rating
+  }
+}
+
+query {
+  books(orderBy: RATING_DESC) {
+    id
+    title
+    rating
+  }
+}
+
+fragment Book on Book {
+  id
+  title
+  description
+  rating
+}
+
+fragment Review on Review {
+  id
+  title
+  rating
+  comment
+  user {
+    name
+  }
+}
+
+query Home($orderBy: BooksOrderBy) {
+  reviews {
+    ...Review
+    book {
+      ...Book
+      imageUrl(size: SMALL)
+    }
+  }
+  books(orderBy: $orderBy) {
+    ...Book
+    imageUrl
+    authors {
+      name
+    }
+  }
+}

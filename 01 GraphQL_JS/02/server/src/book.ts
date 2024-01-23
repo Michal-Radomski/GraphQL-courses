@@ -9,7 +9,9 @@ async function findBooksByIds(ids: string[]) {
   from hb.book
   where hb.book.id = ANY($1);
   `;
+
   const params = [ids];
+
   try {
     const result = await query(sql, params);
     const rowsById = (R.groupBy as any)((book: { id: string }) => book.id, result?.rows);
@@ -33,7 +35,9 @@ export async function findBookById(id: string[]) {
   from hb.book
   where hb.book.id = $1;
   `;
+
   const params = [id];
+
   try {
     const result = await query(sql, params);
     return (result as any)?.rows[0];
@@ -43,10 +47,18 @@ export async function findBookById(id: string[]) {
   }
 }
 
-export async function allBooks() {
+const ORDER_BY = {
+  ID_DESC: "id desc",
+  RATING_DESC: "rating desc",
+};
+
+export async function allBooks(args: { [key: string]: string }) {
+  const orderBy = ORDER_BY[args.orderBy as keyof typeof ORDER_BY];
   const sql = `
-  select * from hb.book;
+  select * from hb.book
+  order by ${orderBy};
   `;
+
   try {
     const result = await query(sql);
     // console.log("result:", result);

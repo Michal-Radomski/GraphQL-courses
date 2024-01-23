@@ -40,10 +40,12 @@ const resolvers = {
     },
   },
   Query: {
-    books: () => {
-      return allBooks();
+    books: (_root: object, args: { [key: string]: string }) => {
+      return allBooks(args);
     },
-    reviews: () => allReviews(),
+    reviews: (_root: object, args: { [key: string]: string }) => {
+      return allReviews(args);
+    },
   },
 };
 
