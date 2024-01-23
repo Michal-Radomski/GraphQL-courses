@@ -16,7 +16,7 @@ import resolvers from "./resolvers";
 import { pool } from "./db";
 import loaders from "./loader";
 
-(async function expressGraphQLServer() {
+(async function expressGraphQLServer(): Promise<void> {
   // console.log("loaders:", loaders);
 
   const schema = await makeExecutableSchema({ typeDefs, resolvers });

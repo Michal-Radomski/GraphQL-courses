@@ -26,8 +26,17 @@ const resolvers = {
     ) => {
       const { loaders } = context;
       const { findBooksByIdsLoader } = loaders;
-      return findBooksByIdsLoader.load(review.bookId);
       // findBookById(review.bookId)
+      return findBooksByIdsLoader.load(review.bookId);
+    },
+    user: (
+      review: { userId: string },
+      _args: string[],
+      context: { loaders: { [key: string]: DataLoader<unknown, unknown, unknown> } }
+    ) => {
+      const { loaders } = context;
+      const { findUsersByIdsLoader } = loaders;
+      return findUsersByIdsLoader.load(review.userId);
     },
   },
   Query: {

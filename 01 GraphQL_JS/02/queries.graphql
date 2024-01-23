@@ -19,5 +19,33 @@ query ReviewQuery {
     rating
     title
     comment
+    book {
+      id
+      title
+      description
+      imageUrl
+      rating
+      subtitle
+      ratingCount
+      authors {
+        name
+      }
+    }
+  }
+}
+
+query HomePage {
+  reviews {
+    id
+    rating
+    title
+    comment
+    book {
+      id
+      title
+    }
+    user {
+      name
+    }
   }
 }

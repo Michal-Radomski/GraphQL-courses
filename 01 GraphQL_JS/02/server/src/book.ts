@@ -18,7 +18,7 @@ async function findBooksByIds(ids: string[]) {
       return book;
     }, ids);
   } catch (err) {
-    console.log(err);
+    console.log({ err });
     throw err;
   }
 }
