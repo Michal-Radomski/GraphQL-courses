@@ -3,10 +3,10 @@ const typeDefs = `
 schema {
   query: Query
 }
-
 type Query {
   books(orderBy: BooksOrderBy = RATING_DESC): [Book]
   reviews(orderBy: ReviewsOrderBy = ID_DESC): [Review]
+  book(id: ID!): Book
 }
 enum ReviewsOrderBy {
   ID
@@ -16,7 +16,6 @@ enum BooksOrderBy {
   RATING_DESC
   ID_DESC
 }
-
 type Review {
   id: ID!
   rating: Int
@@ -25,7 +24,11 @@ type Review {
   book: Book
   user: User
 }
-
+type User {
+  id: ID!
+  name: String
+  imageUrl(size: Int = 50): String
+}
 type Book {
   id: ID!
   title: String!
@@ -35,11 +38,7 @@ type Book {
   subtitle: String
   ratingCount: Int
   authors: [Author]
-}
-
-type User {
-  id: ID!
-  name: String
+  reviews: [Review]
 }
 
 type Author {

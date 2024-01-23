@@ -99,3 +99,23 @@ query Home($orderBy: BooksOrderBy) {
     }
   }
 }
+
+query Book($id: ID!) {
+  book(id: $id) {
+    id
+    title
+    description
+    imageUrl
+    rating
+    reviews {
+      id
+      rating
+      title
+      comment
+      user {
+        name
+        imageUrl
+      }
+    }
+  }
+}
