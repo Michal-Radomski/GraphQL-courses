@@ -1,13 +1,16 @@
 import DataLoader from "dataloader";
 import gravatar from "gravatar";
 
-import { allBooks, imageUrl } from "./book";
-import { allReviews } from "./review";
+import { allBooks, imageUrl, searchBook } from "./book";
+import { allReviews, createReview } from "./review";
 
 // A map of functions which return data for the schema
 const resolvers = {
   User: {
     imageUrl: (user: { email: string }, args: { size: number }) => gravatar.url(user.email, { s: String(args.size) }),
+  },
+  SearchBookResult: {
+    imageUrl: (result: { id: string }, args: { size: string }) => imageUrl(args.size, result.id),
   },
   Book: {
     // ratingCount: (book: { rating_count: number }) => book.rating_count,
@@ -68,6 +71,24 @@ const resolvers = {
       const { findBooksByIdsLoader } = loaders;
       return findBooksByIdsLoader.load(args.id);
     },
+    searchBook: (_root: object, args: { query: string }) => {
+      const { query } = args;
+      return searchBook(query);
+    },
+    // search: (_root: object, args: { query: string; }) => {
+    //   const { query } = args;
+    //   return search(query);
+    // }
+  },
+  Mutation: {
+    createReview: (_root: object, args: { reviewInput: object }) => {
+      const { reviewInput } = args;
+      return createReview(reviewInput as any);
+    },
+    // createBook: (_root:object, args: { googleBookId: object; }) => {
+    //   const { googleBookId } = args;
+    //   return createBook(googleBookId);
+    // }
   },
 };
 

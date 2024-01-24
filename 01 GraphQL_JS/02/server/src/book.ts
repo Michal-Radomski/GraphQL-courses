@@ -1,7 +1,21 @@
 import * as R from "ramda";
 import DataLoader from "dataloader";
+import axios from "axios";
 
 import query from "./db";
+
+export async function searchBook(query: string) {
+  const url = `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(query)}`;
+  try {
+    const result = await axios(url);
+    const items = R.pathOr([], ["data", "items"], result);
+    const books = R.map((book: any) => ({ id: book.id, ...book.volumeInfo }), items);
+    return books;
+  } catch (err) {
+    console.log({ err });
+    throw err;
+  }
+}
 
 async function findBooksByIds(ids: string[]) {
   const sql = `

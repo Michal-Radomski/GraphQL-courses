@@ -66,6 +66,7 @@ query {
   }
 }
 
+#* Fragments: 3 fields and more!
 fragment Book on Book {
   id
   title
@@ -117,5 +118,27 @@ query Book($id: ID!) {
         imageUrl
       }
     }
+    authors {
+      name
+    }
+  }
+}
+
+mutation CreateReview($reviewInput: ReviewInput!) {
+  createReview(reviewInput: $reviewInput) {
+    id
+    rating
+    title
+    comment
+  }
+}
+
+query SearchBook {
+  searchBook(query: "hunger games") {
+    id
+    title
+    description
+    authors
+    imageUrl
   }
 }

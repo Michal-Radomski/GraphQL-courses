@@ -47,3 +47,25 @@ export async function allReviews(args: { [key: string]: string }) {
     throw err;
   }
 }
+
+export async function createReview(reviewInput: {
+  bookId: string;
+  email: string;
+  name: string;
+  rating: string;
+  title: string;
+  comment: string;
+}) {
+  const { bookId, email, name, rating, title, comment } = reviewInput;
+  const sql = `
+  select * from hb.create_review($1, $2, $3, $4, $5, $6);
+  `;
+  const params = [bookId, email, name, rating, title, comment];
+  try {
+    const result = (await query(sql, params as any)) as any;
+    return result.rows[0];
+  } catch (err) {
+    console.log({ err });
+    throw err;
+  }
+}
