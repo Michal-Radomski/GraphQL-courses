@@ -1,4 +1,7 @@
 // The GraphQL schema
+
+//* The @deprecated directive allows you to tag the schema definition of a field or enum value as deprecated with an optional reason.
+
 const typeDefs = `
 schema {
   query: Query

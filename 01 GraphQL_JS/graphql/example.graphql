@@ -248,7 +248,7 @@ query Users {
   }
 }
 
-# *Errors: can be errors and answers in one respond!
+#* Errors: can be errors and answers in one respond!
 
 query Books {
   books {
