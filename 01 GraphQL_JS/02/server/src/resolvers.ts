@@ -13,6 +13,9 @@ const resolvers = {
   SearchBookResult: {
     imageUrl: (result: { id: string }, args: { size: string }) => imageUrl(args.size, result.id),
   },
+  SearchResult: {
+    __resolveType: (obj: { __type: unknown }) => obj.__type,
+  },
   Book: {
     // ratingCount: (book: { rating_count: number }) => book.rating_count,
     imageUrl: (book: { googleId: string }, { size }: { size: string }) => imageUrl(size, book.googleId),
