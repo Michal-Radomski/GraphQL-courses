@@ -1,0 +1,8 @@
+query {
+  # If non-existing id null is returned
+  user(id: "23") {
+    id
+    firstName
+    age
+  }
+}
