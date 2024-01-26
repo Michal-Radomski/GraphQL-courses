@@ -8,16 +8,19 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import morgan from "morgan";
 import helmet from "helmet";
-import { createHandler } from "graphql-http/lib/use/express";
+import { graphqlHTTP } from "express-graphql";
 import { GraphQLSchema, GraphQLObjectType, GraphQLString } from "graphql";
 
+//* GraphQL schema
 const schema = new GraphQLSchema({
   query: new GraphQLObjectType({
-    name: "Query",
+    name: "RootQueryType",
     fields: {
       hello: {
         type: GraphQLString,
-        resolve: () => "world",
+        resolve() {
+          return "world";
+        },
       },
     },
   }),
@@ -53,13 +56,19 @@ app.get("/favicon.ico", (_req: Request, res: Response) => {
   res.sendFile(path.join(__dirname + "/favicon.svg"));
 });
 //* Test route
-app.get("/", (req: Request, res: Response) => {
-  console.log("req.ip:", req.ip);
-  res.send("<h1 style='color:blue;text-align:center'>API is running</h1>");
-});
+// app.get("/", (req: Request, res: Response) => {
+//   console.log("req.ip:", req.ip);
+//   res.send("<h1 style='color:blue;text-align:center'>API is running</h1>");
+// });
 
 //* GraphQL
-app.all("/graphql", createHandler({ schema }));
+app.all(
+  "/graphql",
+  graphqlHTTP({
+    schema: schema,
+    graphiql: true,
+  })
+);
 
 //* Port
 const portHTTP = (process.env.PORT || 5000) as number;
