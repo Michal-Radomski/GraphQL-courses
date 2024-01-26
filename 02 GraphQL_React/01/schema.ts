@@ -1,10 +1,11 @@
 import { GraphQLSchema, GraphQLObjectType, GraphQLString, GraphQLInt } from "graphql";
-import _ from "lodash";
+// import _ from "lodash";
+import axios from "axios";
 
-const users = [
-  { id: "23", firstName: "Bill", age: 20 },
-  { id: "47", firstName: "Samantha", age: 21 },
-];
+// const users = [
+//   { id: "23", firstName: "Bill", age: 20 },
+//   { id: "47", firstName: "Samantha", age: 21 },
+// ];
 
 //* Example
 // const schema = new GraphQLSchema({
@@ -37,8 +38,15 @@ const RootQuery = new GraphQLObjectType({
     user: {
       type: UserType,
       args: { id: { type: GraphQLString } },
+      // resolve(_parentValue: string, args) {
+      //   return _.find(users, { id: args.id });
+      // },
       resolve(_parentValue: string, args) {
-        return _.find(users, { id: args.id });
+        // console.log("args:", args);
+        return axios.get(`http://localhost:3000/users/${args.id}`).then((response) => {
+          // console.log("response?.data:", response?.data);
+          return response?.data;
+        });
       },
     },
   },
