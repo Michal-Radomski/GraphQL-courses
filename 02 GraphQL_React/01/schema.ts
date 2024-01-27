@@ -112,7 +112,7 @@ const mutation = new GraphQLObjectType({
 });
 
 const schema = new GraphQLSchema({
-  mutation,
+  mutation: mutation,
   query: RootQuery,
 });
 
