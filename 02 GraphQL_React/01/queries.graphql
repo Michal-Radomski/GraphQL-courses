@@ -111,6 +111,7 @@ mutation {
 }
 
 mutation {
+  # Return id: null -> means it's ok!
   deleteUser(id: "ySwyJij") {
     id
   }
@@ -118,8 +119,12 @@ mutation {
 
 mutation {
   editUser(id: "41", firstName: "Michal", age: 140, companyId: "1") {
+    #* Response includes:
     id
     firstName
     age
+    company {
+      id
+    }
   }
 }

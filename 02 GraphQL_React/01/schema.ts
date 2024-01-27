@@ -126,6 +126,7 @@ const mutation = new GraphQLObjectType({
         companyId: { type: GraphQLString },
       },
       resolve(_parentValue, args) {
+        //* Patch doesn't updates Id!
         return axios.patch(`http://localhost:3000/users/${args.id}`, args).then((res) => res.data);
       },
     },

@@ -16,6 +16,7 @@ import schema from "./schema";
 //* The server
 const app: Express = express();
 
+// PUT -> completely replace the existing record, and PATH -> updates the existing record
 const corsOptions = {
   origin: true,
   methods: ["POST", "GET", "PUT", "DELETE", "PATCH", "HEAD"],
