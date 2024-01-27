@@ -1,4 +1,4 @@
-import { GraphQLSchema, GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLList } from "graphql";
+import { GraphQLSchema, GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLList, GraphQLNonNull } from "graphql";
 // import _ from "lodash";
 import axios from "axios";
 
@@ -94,7 +94,25 @@ const RootQuery = new GraphQLObjectType({
   },
 });
 
+const mutation = new GraphQLObjectType({
+  name: "Mutation",
+  fields: {
+    addUser: {
+      type: UserType,
+      args: {
+        firstName: { type: new GraphQLNonNull(GraphQLString) },
+        age: { type: new GraphQLNonNull(GraphQLInt) },
+        companyId: { type: GraphQLString },
+      },
+      resolve(_parentValue, { firstName, age, companyId }) {
+        return axios.post("http://localhost:3000/users", { firstName, age, companyId }).then((res) => res.data);
+      },
+    },
+  },
+});
+
 const schema = new GraphQLSchema({
+  mutation,
   query: RootQuery,
 });
 
