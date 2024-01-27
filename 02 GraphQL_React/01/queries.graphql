@@ -109,3 +109,17 @@ mutation {
     age
   }
 }
+
+mutation {
+  deleteUser(id: "ySwyJij") {
+    id
+  }
+}
+
+mutation {
+  editUser(id: "41", firstName: "Michal", age: 140, companyId: "1") {
+    id
+    firstName
+    age
+  }
+}
