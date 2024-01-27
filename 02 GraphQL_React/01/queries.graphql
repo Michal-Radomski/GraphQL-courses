@@ -40,3 +40,35 @@ query {
     description
   }
 }
+
+query {
+  company(id: "1") {
+    id
+    name
+    description
+    users {
+      id
+      firstName
+      age
+    }
+  }
+}
+
+# Strange nested circular relations
+query {
+  company(id: "1") {
+    id
+    name
+    description
+    users {
+      id
+      firstName
+      age
+      company {
+        id
+        name
+        description
+      }
+    }
+  }
+}
