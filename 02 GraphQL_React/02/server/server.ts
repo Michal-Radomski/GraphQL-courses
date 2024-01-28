@@ -11,6 +11,13 @@ import morgan from "morgan";
 import helmet from "helmet";
 import { graphqlHTTP } from "express-graphql";
 
+// //* Webpack
+// import webpackMiddleware from "webpack-dev-middleware";
+// import webpack from "webpack";
+
+// // webpack server config
+// import serverConfig from "../server.webpack.config";
+
 //* Import GraphQL schema
 import schema from "./schema/schema";
 
@@ -39,6 +46,7 @@ app.use(
     crossOriginOpenerPolicy: false,
   })
 );
+// app.use(webpackMiddleware(webpack(serverConfig)));
 
 //* Mongo DB
 // console.log("process.env.MONGO_URL:", process.env.MONGO_URL);
@@ -54,10 +62,10 @@ app.get("/favicon.ico", (_req: Request, res: Response) => {
   res.sendFile(path.join(__dirname + "/favicon.svg"));
 });
 //* Test route
-app.get("/", (req: Request, res: Response) => {
-  console.log("req.ip:", req.ip);
-  res.send("<h1 style='color:blue;text-align:center'>API is running</h1>");
-});
+// app.get("/", (req: Request, res: Response) => {
+//   console.log("req.ip:", req.ip);
+//   res.send("<h1 style='color:blue;text-align:center'>API is running</h1>");
+// });
 
 //* GraphQL
 app.all(

@@ -36,7 +36,6 @@ const config: webpack.Configuration = {
         type: "asset/resource",
       },
       { test: /\.(svg)$/, type: "asset/inline" },
-      // { test: /\.css$/, use: ["style-loader", "css-loader"] },
       { test: /\.css$/, use: [MiniCssExtractPlugin.loader, "css-loader"] },
       {
         test: /\.s[ac]ss$/i,
