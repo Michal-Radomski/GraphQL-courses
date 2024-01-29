@@ -9,17 +9,18 @@ import App from "./App";
 // import gql from "graphql-tag";
 
 const apolloClient = new ApolloClient({
-  link: new HttpLink({ uri: "http://localhost:5000/graphql" }),
+  link: new HttpLink({ uri: "/graphql" }),
   cache: new InMemoryCache(),
 });
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 root.render(
-  <React.StrictMode>
+  <React.Fragment>
+    {/* //* React.StrictMode blocks apolloClient! */}
     <ApolloProvider client={apolloClient}>
       <App />
     </ApolloProvider>
-  </React.StrictMode>
+  </React.Fragment>
 );
 
 // apolloClient
@@ -33,5 +34,5 @@ root.render(
 //       }
 //     `,
 //   })
-//   .then((data) => console.log(data))
-//   .catch((error) => console.error(error));
+//   .then((data) => console.log("data:", data))
+//   .catch((error) => console.error({ error }));
