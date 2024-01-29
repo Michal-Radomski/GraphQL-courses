@@ -5,6 +5,7 @@ import "./styles/App.scss";
 if (module.hot) {
   module.hot.accept();
 }
+// console.log("module:", module);
 
 const App = (): JSX.Element => {
   return <React.Fragment>App</React.Fragment>;
