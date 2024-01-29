@@ -29,7 +29,7 @@ const corsOptions = {
   methods: ["POST", "GET", "PUT", "DELETE", "PATCH", "HEAD"],
   preflightContinue: false,
   optionsSuccessStatus: 200,
-  credentials: true,
+  credentials: false,
 };
 
 //* Middlewares

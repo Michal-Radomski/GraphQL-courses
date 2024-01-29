@@ -160,3 +160,10 @@ query {
     }
   }
 }
+
+{
+  songs {
+    id
+    title
+  }
+}

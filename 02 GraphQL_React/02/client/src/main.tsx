@@ -6,10 +6,10 @@ import { InMemoryCache } from "apollo-cache-inmemory";
 import { HttpLink } from "apollo-link-http";
 
 import App from "./App";
+// import gql from "graphql-tag";
 
 const apolloClient = new ApolloClient({
-  // link: new HttpLink({ uri: "http://localhost:5000/graphql" }),
-  link: new HttpLink(),
+  link: new HttpLink({ uri: "http://localhost:5000/graphql" }),
   cache: new InMemoryCache(),
 });
 
@@ -21,3 +21,17 @@ root.render(
     </ApolloProvider>
   </React.StrictMode>
 );
+
+// apolloClient
+//   .query({
+//     query: gql`
+//       {
+//         songs {
+//           id
+//           title
+//         }
+//       }
+//     `,
+//   })
+//   .then((data) => console.log(data))
+//   .catch((error) => console.error(error));

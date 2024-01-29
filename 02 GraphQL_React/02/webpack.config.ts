@@ -14,6 +14,11 @@ const config: webpack.Configuration = {
   target: "browserslist",
   output: { path: path.join(__dirname, "/dist"), filename: "bundle.js", clean: true, publicPath: "", iife: true },
   devServer: {
+    allowedHosts: ["http://localhost:3000", "http://localhost:5000"],
+    proxy: {
+      "/graphql": "http://localhost:5000",
+      changeOrigin: true,
+    },
     static: {
       directory: path.resolve(__dirname, "./dist"),
       watch: true,

@@ -1,6 +1,7 @@
 import React from "react";
 
 import "./styles/App.scss";
+import SongList from "./components/SongList";
 
 if (module.hot) {
   module.hot.accept();
@@ -8,7 +9,11 @@ if (module.hot) {
 // console.log("module:", module);
 
 const App = (): JSX.Element => {
-  return <React.Fragment>App</React.Fragment>;
+  return (
+    <React.Fragment>
+      <SongList />
+    </React.Fragment>
+  );
 };
 
 export default App;
