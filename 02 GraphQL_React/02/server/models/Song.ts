@@ -3,7 +3,7 @@ import mongoose, { Schema, Document } from "mongoose";
 interface ISong extends Document {
   title: string;
   user: Schema.Types.ObjectId;
-  lyrics: [Schema.Types.ObjectId];
+  lyrics: [string];
 }
 
 const songSchema: Schema = new Schema({

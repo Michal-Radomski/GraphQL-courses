@@ -128,3 +128,35 @@ mutation {
     }
   }
 }
+
+#* Part Two
+
+mutation {
+  addSong(title: "Cold Night") {
+    id
+  }
+}
+
+mutation {
+  addLyricToSong(songId: "65b6f247266fb46657f17c03", content: "It's cold night!") {
+    id
+  }
+}
+
+query {
+  songs {
+    id
+    title
+  }
+}
+
+query {
+  songs {
+    id
+    title
+    lyrics {
+      id
+      content
+    }
+  }
+}
