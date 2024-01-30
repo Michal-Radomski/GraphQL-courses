@@ -19,3 +19,7 @@ interface Song {
 interface Props {
   data: { songs: Song[]; loading: boolean };
 }
+
+interface State {
+  title: string;
+}

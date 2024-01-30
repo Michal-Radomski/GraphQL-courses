@@ -1,7 +1,22 @@
 import React from "react";
 
-const SongCreate = (): JSX.Element => {
-  return <React.Fragment>SongCreate</React.Fragment>;
-};
+class SongCreate extends React.Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
+    this.state = { title: "" };
+  }
+
+  render() {
+    return (
+      <div>
+        <h3>Create a New Song</h3>
+        <form>
+          <label>Song Title:</label>
+          <input onChange={(event) => this.setState({ title: event.target.value })} value={this.state.title} />
+        </form>
+      </div>
+    );
+  }
+}
 
 export default SongCreate;
