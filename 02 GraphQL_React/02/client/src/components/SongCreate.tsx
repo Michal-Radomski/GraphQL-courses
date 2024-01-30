@@ -5,8 +5,8 @@ import { graphql } from "react-apollo";
 const mutation = gql`
   mutation AddSong($title: String) {
     addSong(title: $title) {
-      title
       id
+      title
     }
   }
 `;
@@ -19,7 +19,7 @@ class SongCreate extends React.Component<Props, State> {
 
   onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-
+    // console.log("this.props:", this.props);
     this.props.mutate({
       variables: {
         title: this.state.title,
