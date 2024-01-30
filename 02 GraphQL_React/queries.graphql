@@ -130,7 +130,6 @@ mutation {
 }
 
 #* Part Two
-
 mutation {
   addSong(title: "Cold Night") {
     id
@@ -163,6 +162,13 @@ query {
 
 {
   songs {
+    id
+    title
+  }
+}
+
+mutation {
+  addSong(title: "Summer Night") {
     id
     title
   }
