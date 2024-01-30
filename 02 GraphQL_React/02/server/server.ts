@@ -13,10 +13,11 @@ import { graphqlHTTP } from "express-graphql";
 
 // //* Webpack
 import webpackMiddleware from "webpack-dev-middleware";
+import webpackHotMiddleware from "webpack-hot-middleware";
 import webpack from "webpack";
 
 // webpack server config
-import serverConfig from "../webpack.config";
+import webpackConfig from "../webpack.config";
 
 //* Import GraphQL schema
 import schema from "./schema/schema";
@@ -46,7 +47,11 @@ app.use(
     crossOriginOpenerPolicy: false,
   })
 );
-app.use(webpackMiddleware(webpack(serverConfig)));
+
+//* Webpack
+const webpackCompiler = webpack(webpackConfig);
+app.use(webpackMiddleware(webpackCompiler));
+app.use(webpackHotMiddleware(webpackCompiler));
 
 //* Mongo DB
 // console.log("process.env.MONGO_URL:", process.env.MONGO_URL);

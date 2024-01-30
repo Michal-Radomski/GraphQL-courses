@@ -9,16 +9,14 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const config: webpack.Configuration = {
   mode: "development",
-  entry: "./client/src/main.tsx",
+  // entry: "./client/src/main.tsx",
+  entry: {
+    main: ["webpack-hot-middleware/client?reload=true", "./client/src/main.tsx"],
+  },
   devtool: "inline-source-map",
   target: "browserslist",
   output: { path: path.join(__dirname, "/dist"), filename: "bundle.js", clean: true, publicPath: "", iife: true },
   // devServer: {
-  //   allowedHosts: ["http://localhost:3000", "http://localhost:5000"],
-  //   proxy: {
-  //     "/graphql": "http://localhost:5000",
-  //     changeOrigin: true,
-  //   },
   //   static: {
   //     directory: path.resolve(__dirname, "./dist"),
   //     watch: true,
@@ -63,6 +61,7 @@ const config: webpack.Configuration = {
       chunkFilename: "[id].chunk_css.css",
     }),
     new HtmlWebpackPlugin({ template: "./client/public/index.html", favicon: "./client/public/favicon.svg" }),
+    new webpack.HotModuleReplacementPlugin(),
   ],
 };
 
