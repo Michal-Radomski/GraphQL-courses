@@ -10,3 +10,12 @@ declare module "*.svg" {
 
 declare module "*.module.css";
 declare module "*.module.scss";
+
+interface Song {
+  title: string;
+  id: string;
+}
+
+interface Props {
+  data: { songs: Song[]; loading: boolean };
+}
