@@ -18,6 +18,7 @@ interface Song {
 
 interface Props {
   data: { songs: Song[]; loading: boolean };
+  mutate(arg0: { variables: { title: string } }): void;
 }
 
 interface State {

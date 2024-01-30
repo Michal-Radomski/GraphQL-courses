@@ -1,4 +1,4 @@
-import React, { ComponentClass } from "react";
+import React from "react";
 import gql from "graphql-tag";
 import { graphql } from "react-apollo";
 
@@ -31,4 +31,4 @@ class SongList extends React.Component<Props, {}> {
   }
 }
 
-export default graphql(query)(SongList as ComponentClass<any, any>);
+export default graphql(query)(SongList as React.ComponentClass<any, any>);
