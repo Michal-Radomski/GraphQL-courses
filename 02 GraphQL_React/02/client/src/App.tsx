@@ -1,17 +1,9 @@
 import React from "react";
 
-import "./styles/App.scss";
-import SongList from "./components/SongList";
-
-if (module.hot) {
-  module.hot.accept();
-}
-// console.log("module:", module);
-
-const App = (): JSX.Element => {
+const App = ({ children }: { children: JSX.Element }): JSX.Element => {
   return (
     <React.Fragment>
-      <SongList />
+      <div className="container">{children}</div>
     </React.Fragment>
   );
 };
