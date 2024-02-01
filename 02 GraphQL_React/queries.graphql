@@ -180,3 +180,18 @@ mutation AddSong($title: String) {
     title
   }
 }
+
+# Delete
+query {
+  songs {
+    id
+    title
+  }
+}
+
+mutation DeleteSong($id: ID) {
+  deleteSong(id: $id) {
+    id
+    title
+  }
+}
