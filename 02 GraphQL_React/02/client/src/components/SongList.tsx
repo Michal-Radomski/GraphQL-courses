@@ -16,7 +16,10 @@ const mutation = gql`
 
 class SongList extends React.Component<Props, {}> {
   onSongDelete(id: string) {
-    this.props.mutate({ variables: { id } });
+    this.props
+      .mutate({ variables: { id } })
+      .then((res) => console.log("res:", res))
+      .catch((err) => console.log({ err }));
   }
 
   renderSongs() {
