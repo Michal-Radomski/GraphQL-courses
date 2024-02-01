@@ -18,7 +18,10 @@ class SongList extends React.Component<Props, {}> {
   onSongDelete(id: string) {
     this.props
       .mutate({ variables: { id } })
-      .then((res) => console.log("res:", res))
+      .then((_res) => {
+        // console.log("_res:", _res);
+        this.props.data.refetch();
+      })
       .catch((err) => console.log({ err }));
   }
 
@@ -27,7 +30,7 @@ class SongList extends React.Component<Props, {}> {
       return (
         <li key={index + id} className="collection-item">
           {title} ({id}){" "}
-          <i className="material-icons" onClick={() => this.onSongDelete(id)} style={{ cursor: "pointer" }}>
+          <i className="material-icons" onClick={() => this.onSongDelete(id)}>
             delete
           </i>
         </li>

@@ -17,7 +17,7 @@ interface Song {
 }
 
 interface Props {
-  data: { songs: Song[]; loading: boolean };
+  data: { songs: Song[]; loading: boolean; refetch(): Function };
   mutate(arg0: { variables: { title?: string; id?: string }; refetchQueries?: DocumentNode[] }): Promise<void>;
 }
 
