@@ -4,7 +4,7 @@ import { Link } from "react-router";
 import gql from "graphql-tag";
 import { flowRight as compose } from "lodash";
 
-import fetchSongs from "../../queries/fetchSong";
+import fetchSongs from "../../queries/fetchSongs";
 
 const mutation = gql`
   mutation DeleteSong($id: ID) {

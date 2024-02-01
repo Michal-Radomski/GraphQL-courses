@@ -2,7 +2,7 @@ import React from "react";
 import gql from "graphql-tag";
 import { graphql } from "react-apollo";
 import { Link, hashHistory } from "react-router";
-import fetchSongs from "../../queries/fetchSong";
+import fetchSongs from "../../queries/fetchSongs";
 
 const mutation = gql`
   mutation AddSong($title: String) {

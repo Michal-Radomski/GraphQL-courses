@@ -195,3 +195,11 @@ mutation DeleteSong($id: ID) {
     title
   }
 }
+
+# One Song Details
+query SongQuery($id: ID!) {
+  song(id: $id) {
+    id
+    title
+  }
+}
