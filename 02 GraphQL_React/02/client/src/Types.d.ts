@@ -18,7 +18,7 @@ interface Song {
 
 interface Props {
   data: { songs: Song[]; loading: boolean };
-  mutate(arg0: { variables: { title: string } }): void;
+  mutate(arg0: { variables: { title: string } }): Promise<any>;
 }
 
 interface State {
