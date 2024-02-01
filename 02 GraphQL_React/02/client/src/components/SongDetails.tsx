@@ -1,7 +1,9 @@
 import React from "react";
 import { graphql } from "react-apollo";
+import { Link } from "react-router";
 
 import fetchOneSong from "../../queries/fetchOneSong";
+
 // console.log("fetchOneSong:", fetchOneSong, typeof fetchOneSong);
 
 class SongDetails extends React.Component<Props, {}> {
@@ -15,13 +17,12 @@ class SongDetails extends React.Component<Props, {}> {
 
     return (
       <div>
+        <Link to="/">Back</Link>
         <h3>{song.title}</h3>
       </div>
     );
   }
 }
-
-// export default SongDetails;
 
 export default graphql(fetchOneSong, {
   options: (props: Props) => {
