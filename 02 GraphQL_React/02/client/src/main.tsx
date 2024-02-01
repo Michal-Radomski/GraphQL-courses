@@ -11,6 +11,7 @@ import "./styles/App.scss";
 import App from "./App";
 import SongList from "./components/SongList";
 import SongCreate from "./components/SongCreate";
+import SongDetails from "./components/SongDetails";
 
 if (module.hot) {
   module.hot.accept();
@@ -31,6 +32,7 @@ root.render(
         <Route path="/" component={App}>
           <IndexRoute component={SongList} />
           <Route path="song/new" component={SongCreate} />
+          <Route path="song/:id" component={SongDetails} />
         </Route>
       </Router>
     </ApolloProvider>
