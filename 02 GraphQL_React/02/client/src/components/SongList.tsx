@@ -1,16 +1,8 @@
 import React from "react";
-import gql from "graphql-tag";
 import { graphql } from "react-apollo";
 import { Link } from "react-router";
 
-const query = gql`
-  {
-    songs {
-      id
-      title
-    }
-  }
-`;
+import fetchSongs from "../../queries/fetchSong";
 
 class SongList extends React.Component<Props, {}> {
   renderSongs() {
@@ -39,4 +31,4 @@ class SongList extends React.Component<Props, {}> {
   }
 }
 
-export default graphql(query)(SongList as React.ComponentClass<any, any>);
+export default graphql(fetchSongs)(SongList as React.ComponentClass<any, any>);
