@@ -23,7 +23,7 @@ class SongCreate extends React.Component<Props, State> {
     event.preventDefault();
     // console.log("this.props:", this.props);
     this.props
-      .mutate({
+      .mutate?.({
         variables: { title: this.state.title },
         refetchQueries: [{ query: fetchSongs }],
       })

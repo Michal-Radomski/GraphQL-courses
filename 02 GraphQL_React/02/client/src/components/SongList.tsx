@@ -16,11 +16,10 @@ const mutation = gql`
 
 class SongList extends React.Component<Props, {}> {
   onSongDelete(id: string) {
-    this.props
-      .mutate({ variables: { id } })
+    this.props.mutate!({ variables: { id } })
       .then((_res) => {
         // console.log("_res:", _res);
-        this.props.data.refetch();
+        this.props.data?.refetch();
       })
       .catch((err) => console.log({ err }));
   }
@@ -42,7 +41,7 @@ class SongList extends React.Component<Props, {}> {
 
   render() {
     // console.log("this.props?.data?.songs:", this.props?.data?.songs);
-    if (this.props.data.loading) {
+    if (this.props.data?.loading) {
       return <div>Loading...</div>;
     }
     return (

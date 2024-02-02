@@ -14,12 +14,17 @@ declare module "*.module.scss";
 interface Song {
   title: string;
   id: string;
+  content: string;
 }
 
 interface Props {
+  songId?: string;
   params?: { id: string };
   data?: { songs: Song[]; loading: boolean; refetch(): Function; song: Song };
-  mutate?(arg0: { variables: { title?: string; id?: string }; refetchQueries?: DocumentNode[] }): Promise<void>;
+  mutate?(arg0: {
+    variables: { title?: string; id?: string; content?: string; songId?: string };
+    refetchQueries?: DocumentNode[];
+  }): Promise<void>;
 }
 
 interface State {

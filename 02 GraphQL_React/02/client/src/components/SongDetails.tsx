@@ -4,10 +4,11 @@ import { Link } from "react-router";
 
 import fetchOneSong from "../../queries/fetchOneSong";
 import LyricCreate from "./LyricCreate";
+import LyricList from "./LyricList";
 
 // console.log("fetchOneSong:", fetchOneSong, typeof fetchOneSong);
 
-class SongDetails extends React.Component<Props, {}> {
+class SongDetails extends React.Component<Props, State> {
   render() {
     // console.log("this.props:", this.props);
     const { song } = this?.props?.data!;
@@ -20,7 +21,9 @@ class SongDetails extends React.Component<Props, {}> {
       <div>
         <Link to="/">Back</Link>
         <h3>{song.title}</h3>
-        <LyricCreate />
+        <LyricList />
+        {/* @ts-ignore */}
+        <LyricCreate songId={this.props.params?.id as string} />
       </div>
     );
   }
