@@ -17,11 +17,12 @@ interface Song {
 }
 
 interface Props {
-  params: { id: string };
-  data: { songs: Song[]; loading: boolean; refetch(): Function; song: Song };
-  mutate(arg0: { variables: { title?: string; id?: string }; refetchQueries?: DocumentNode[] }): Promise<void>;
+  params?: { id: string };
+  data?: { songs: Song[]; loading: boolean; refetch(): Function; song: Song };
+  mutate?(arg0: { variables: { title?: string; id?: string }; refetchQueries?: DocumentNode[] }): Promise<void>;
 }
 
 interface State {
-  title: string;
+  title?: string;
+  content?: string;
 }
