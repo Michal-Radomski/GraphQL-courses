@@ -20,7 +20,9 @@ if (module.hot) {
 
 const apolloClient = new ApolloClient({
   link: new HttpLink({ uri: "/graphql" }),
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache({
+    dataIdFromObject: (o) => o.id,
+  }),
 });
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
