@@ -29,7 +29,7 @@ class SongList extends React.Component<Props, {}> {
       return (
         <li key={index + id} className="collection-item">
           <Link to={`/song/${id}`}>
-            {title} ({id}){" "}
+            {title} ({id})
           </Link>
           <i className="material-icons" onClick={() => this.onSongDelete(id)}>
             delete

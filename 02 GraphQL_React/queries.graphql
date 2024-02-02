@@ -215,3 +215,15 @@ mutation AddLyricToSong($content: String, $songId: ID) {
     }
   }
 }
+
+# Updated Query
+query SongQuery($id: ID!) {
+  song(id: $id) {
+    id
+    title
+    lyrics {
+      id
+      content
+    }
+  }
+}
