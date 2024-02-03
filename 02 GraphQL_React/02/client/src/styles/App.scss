@@ -30,8 +30,14 @@ li.collection-item {
   align-content: center;
   i.material-icons {
     cursor: pointer;
+    margin-right: 0.25rem;
     &:hover {
       transform: scale(1.05);
     }
   }
+}
+
+.vote-box {
+  display: flex;
+  align-items: center;
 }

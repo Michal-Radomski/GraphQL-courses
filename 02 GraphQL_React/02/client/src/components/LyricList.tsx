@@ -22,10 +22,12 @@ class LyricList extends React.Component<Props, {}> {
       return (
         <li key={id} className="collection-item">
           {content} ({id})
-          <i className="material-icons" onClick={() => this.onLike(id)}>
-            thumb_up
-          </i>
-          {likes}
+          <div className="vote-box">
+            <i className="material-icons" onClick={() => this.onLike(id)}>
+              thumb_up
+            </i>
+            {likes}
+          </div>
         </li>
       );
     });
