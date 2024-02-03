@@ -12,14 +12,14 @@ declare module "*.module.css";
 declare module "*.module.scss";
 
 interface Song {
-  lyrics: { id: string; content: string }[];
+  lyrics: { id: string; content: string; likes: number }[];
   title: string;
   id: string;
   content: string;
 }
 
 interface Props {
-  lyrics?: { id: string; content: string }[];
+  lyrics?: { id: string; content: string; likes: number }[];
   songId?: string;
   params?: { id: string };
   data?: { songs: Song[]; loading: boolean; refetch(): Function; song: Song };
