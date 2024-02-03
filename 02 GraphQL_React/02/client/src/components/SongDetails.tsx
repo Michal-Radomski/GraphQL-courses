@@ -13,6 +13,7 @@ class SongDetails extends React.Component<Props, State> {
     // console.log("this.props:", this.props);
     const { song } = this?.props?.data!;
 
+    //* Check if data is available - always!
     if (!song) {
       return <div>Loading...</div>;
     }
