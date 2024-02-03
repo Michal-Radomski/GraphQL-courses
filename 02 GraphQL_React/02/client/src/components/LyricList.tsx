@@ -12,9 +12,19 @@ const mutation = gql`
 `;
 
 class LyricList extends React.Component<Props, {}> {
-  onLike(id: string) {
-    // console.log({ id });
-    this.props.mutate!({ variables: { id } });
+  onLike(id: string, likes: number) {
+    // console.log({ id, likes });
+    this.props.mutate!({
+      variables: { id: id },
+      optimisticResponse: {
+        __typename: "Mutation",
+        likeLyric: {
+          id: id,
+          __typename: "LyricType",
+          likes: likes + 1,
+        },
+      },
+    });
   }
 
   renderLyrics() {
@@ -23,7 +33,7 @@ class LyricList extends React.Component<Props, {}> {
         <li key={id} className="collection-item">
           {content} ({id})
           <div className="vote-box">
-            <i className="material-icons" onClick={() => this.onLike(id)}>
+            <i className="material-icons" onClick={() => this.onLike(id, likes)}>
               thumb_up
             </i>
             {likes}

@@ -26,6 +26,7 @@ interface Props {
   mutate?(arg0: {
     variables: { title?: string; id?: string; content?: string; songId?: string };
     refetchQueries?: DocumentNode[];
+    optimisticResponse?: any;
   }): Promise<void>;
 }
 
