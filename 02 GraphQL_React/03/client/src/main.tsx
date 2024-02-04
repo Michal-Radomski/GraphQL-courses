@@ -14,7 +14,7 @@ if (module.hot) {
 }
 
 const apolloClient = new ApolloClient({
-  link: new HttpLink({ uri: "/graphql" }),
+  link: new HttpLink({ uri: "/graphql", credentials: "same-origin" }),
   cache: new InMemoryCache({
     dataIdFromObject: (o) => o.id,
   }),

@@ -11,8 +11,14 @@ declare module "*.svg" {
 declare module "*.module.css";
 declare module "*.module.scss";
 
+interface User {
+  _typename: string;
+  email: string;
+  id: string;
+}
+
 interface Props {
-  data?: { songs: Song[]; loading: boolean; refetch(): Function; song: Song };
+  data?: { loading: boolean; refetch(): Function; user: User };
 }
 
 interface State {}
