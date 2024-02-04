@@ -1,9 +1,14 @@
 import React from "react";
 
-const App = (): JSX.Element => {
+import Header from "./components/Header";
+
+const App = ({ children }: { children: React.ReactNode }): JSX.Element => {
   return (
     <React.Fragment>
-      <div className="container">App</div>
+      <div>
+        <Header />
+        {children}
+      </div>
     </React.Fragment>
   );
 };
