@@ -18,7 +18,8 @@ interface User {
 }
 
 interface Props {
-  data?: { loading: boolean; refetch(): Function; user: User };
+  mutate?({}): Promise<void>;
+  data?: { loading: boolean; user: User };
 }
 
 interface State {}
