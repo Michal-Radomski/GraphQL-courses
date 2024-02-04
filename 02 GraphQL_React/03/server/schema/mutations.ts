@@ -2,7 +2,7 @@ import { GraphQLObjectType, GraphQLString } from "graphql";
 import { Request } from "express";
 
 import UserType from "./user_type";
-import { signup } from "../services/auth";
+import { login, signup } from "../services/auth";
 
 const mutations: GraphQLObjectType = new GraphQLObjectType({
   name: "Mutation",
@@ -27,6 +27,16 @@ const mutations: GraphQLObjectType = new GraphQLObjectType({
           }
         });
         return user;
+      },
+    },
+    login: {
+      type: UserType,
+      args: {
+        email: { type: GraphQLString },
+        password: { type: GraphQLString },
+      },
+      resolve(_parentValue, { email, password }, req: Request) {
+        return login({ email, password, req });
       },
     },
   },

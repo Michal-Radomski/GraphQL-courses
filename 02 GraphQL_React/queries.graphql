@@ -1,4 +1,4 @@
-#@ GraphQL ID - capital letters1
+#@ GraphQL ID - capital letters!
 
 #* Part Three
 mutation {
@@ -12,6 +12,20 @@ mutation {
     email
   }
 }
+
+mutation {
+  login(email: process.env.EMAIL, password: process.env.PASSWORD) {
+    email
+  }
+}
+
+# Check if the user is login
+query {
+  user {
+    email
+  }
+}
+
 
 #* Part One
 query {
