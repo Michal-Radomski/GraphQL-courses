@@ -1,5 +1,6 @@
 import React from "react";
 import { graphql } from "react-apollo";
+import { hashHistory } from "react-router";
 
 import AuthForm from "./AuthForm";
 import currentUserQuery from "../queries/CurrentUser";
@@ -10,6 +11,21 @@ class LoginForm extends React.Component<Props, State> {
     super(props);
 
     this.state = { errors: [] as string[] };
+  }
+
+  //* V1 -> Deprecated!
+  // componentWillUpdate(nextProps: Props) {
+  //   if (!this.props.data?.user && nextProps.data?.user) {
+  //     hashHistory.push("/dashboard");
+  //   }
+  // }
+
+  //* V2
+  componentDidUpdate() {
+    const { user } = this.props.data!;
+    if (user) {
+      hashHistory.push("/dashboard");
+    }
   }
 
   onSubmit({ email, password }: { email: string; password: string }) {
@@ -33,4 +49,4 @@ class LoginForm extends React.Component<Props, State> {
   }
 }
 
-export default graphql(login)(LoginForm as React.ComponentClass<any, any>);
+export default graphql(currentUserQuery)(graphql(login)(LoginForm as React.ComponentClass<any, any>));
