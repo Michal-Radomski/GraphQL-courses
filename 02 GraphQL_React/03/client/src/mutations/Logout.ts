@@ -1,6 +1,6 @@
 import gql from "graphql-tag";
 
-const Logout = gql`
+const logout = gql`
   mutation {
     logout {
       id
@@ -9,4 +9,4 @@ const Logout = gql`
   }
 `;
 
-export default Logout;
+export default logout;

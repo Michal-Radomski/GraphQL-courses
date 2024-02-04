@@ -3,18 +3,21 @@
 #* Part Three
 mutation {
   signup(email: process.env.EMAIL, password: process.env.PASSWORD) {
+    id
     email
   }
 }
 
 mutation {
   logout {
+    id
     email
   }
 }
 
 mutation {
   login(email: process.env.EMAIL, password: process.env.PASSWORD) {
+    id
     email
   }
 }

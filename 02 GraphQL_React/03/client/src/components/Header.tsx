@@ -3,7 +3,7 @@ import { graphql } from "react-apollo";
 
 import currentUserQuery from "../queries/CurrentUser";
 import { Link } from "react-router";
-import Logout from "../mutations/Logout";
+import logout from "../mutations/Logout";
 
 class Header extends React.Component<Props, {}> {
   onLogoutClick() {
@@ -54,4 +54,4 @@ class Header extends React.Component<Props, {}> {
   }
 }
 
-export default graphql(Logout)(graphql(currentUserQuery)(Header as React.ComponentClass<any, any>));
+export default graphql(logout)(graphql(currentUserQuery)(Header as React.ComponentClass<any, any>));

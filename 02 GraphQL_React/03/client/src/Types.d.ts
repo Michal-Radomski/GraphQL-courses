@@ -22,4 +22,7 @@ interface Props {
   data?: { loading: boolean; user: User };
 }
 
-interface State {}
+interface State {
+  email: string;
+  password: string;
+}
