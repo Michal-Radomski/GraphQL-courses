@@ -9,7 +9,7 @@ class SignForm extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
-    this.state = { errors: [] };
+    this.state = { errors: [] as string[] };
   }
 
   onSubmit({ email, password }: { email: string; password: string }) {

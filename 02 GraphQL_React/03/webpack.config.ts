@@ -1,6 +1,5 @@
 import path from "path";
 import webpack from "webpack";
-import "webpack-dev-server";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 
 const HtmlWebpackPlugin = require("html-webpack-plugin");
