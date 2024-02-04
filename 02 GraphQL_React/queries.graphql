@@ -1,5 +1,8 @@
 #@ GraphQL ID - capital letters1
 
+#* Part Three
+
+#* Part One
 query {
   # If non-existing id null is returned
   user(id: "23") {

@@ -9,8 +9,8 @@ export interface IUser extends Document {
 
 const UserSchema: Schema = new mongoose.Schema(
   {
-    email: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
+    email: { type: String, required: true, unique: true, minlength: [6, "Min email length is 3 characters"] },
+    password: { type: String, required: true, minlength: [12, "Min password length is 12 characters"] },
   },
   { timestamps: true }
 );
