@@ -17,6 +17,18 @@ const mutations: GraphQLObjectType = new GraphQLObjectType({
         return signup({ email, password, req });
       },
     },
+    logout: {
+      type: UserType,
+      resolve(_parentValue, _args, req: Request) {
+        const { user } = req;
+        req.logout(function (err) {
+          if (err) {
+            throw err;
+          }
+        });
+        return user;
+      },
+    },
   },
 });
 

@@ -7,6 +7,12 @@ mutation {
   }
 }
 
+mutation {
+  logout {
+    email
+  }
+}
+
 #* Part One
 query {
   # If non-existing id null is returned
