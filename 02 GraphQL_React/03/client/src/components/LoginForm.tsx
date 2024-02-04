@@ -26,7 +26,7 @@ class LoginForm extends React.Component<Props, State> {
   render() {
     return (
       <div>
-        <h3>Login</h3>
+        <h3>Log In</h3>
         <AuthForm onSubmit={this.onSubmit.bind(this)} errors={this.state.errors} />
       </div>
     );
