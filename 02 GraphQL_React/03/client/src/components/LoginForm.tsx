@@ -17,7 +17,7 @@ class LoginForm extends React.Component<Props, State> {
       variables: { email, password },
       refetchQueries: [{ query: currentUserQuery }],
     }).catch((res) => {
-      console.log("res:", res);
+      // console.log("res:", res);
       const errors = res.graphQLErrors.map((error: CustomError) => error.message);
       this.setState({ errors });
     });
@@ -27,7 +27,7 @@ class LoginForm extends React.Component<Props, State> {
     return (
       <div>
         <h3>Login</h3>
-        <AuthForm onSubmit={this.onSubmit.bind(this)} />
+        <AuthForm onSubmit={this.onSubmit.bind(this)} errors={this.state.errors} />
       </div>
     );
   }

@@ -18,6 +18,7 @@ interface User {
 }
 
 interface Props {
+  errors?: string[];
   mutate?(arg0: { refetchQueries?: DocumentNode[]; variables?: { email: string; password: string } }): Promise<void>;
   data?: { loading: boolean; user: User };
   onSubmit({ email, password }: { email: string; password: string }): void;
