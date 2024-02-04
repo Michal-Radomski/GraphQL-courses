@@ -8,6 +8,7 @@ import { Router, Route, hashHistory } from "react-router";
 
 import "./App.scss";
 import App from "./App";
+import LoginForm from "./components/LoginForm";
 
 if (module.hot) {
   module.hot.accept();
@@ -26,7 +27,9 @@ root.render(
   <React.Fragment>
     <ApolloProvider client={apolloClient}>
       <Router history={hashHistory}>
-        <Route path="/" component={App}></Route>
+        <Route path="/" component={App}>
+          <Route path="login" component={LoginForm} />
+        </Route>
       </Router>
     </ApolloProvider>
   </React.Fragment>

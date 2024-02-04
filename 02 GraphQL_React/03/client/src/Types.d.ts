@@ -18,7 +18,7 @@ interface User {
 }
 
 interface Props {
-  mutate?({}): Promise<void>;
+  mutate?(arg0: { refetchQueries?: DocumentNode[] }): Promise<void>;
   data?: { loading: boolean; user: User };
 }
 
