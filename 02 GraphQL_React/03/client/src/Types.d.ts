@@ -24,6 +24,11 @@ interface Props {
 }
 
 interface State {
-  email: string;
-  password: string;
+  email?: string;
+  password?: string;
+  errors?: string[];
+}
+
+interface CustomError extends Error {
+  message: string;
 }
