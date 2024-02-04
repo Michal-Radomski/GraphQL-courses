@@ -10,14 +10,20 @@ import bodyParser from "body-parser";
 import morgan from "morgan";
 import helmet from "helmet";
 import { graphqlHTTP } from "express-graphql";
+import passport from "passport";
+import session from "express-session";
+import MongoStore from "connect-mongo";
 
-// //* Webpack
+//* Webpack
 import webpackMiddleware from "webpack-dev-middleware";
 import webpackHotMiddleware from "webpack-hot-middleware";
 import webpack from "webpack";
 
-// webpack server config
+//* webpack server config
 import webpackConfig from "../webpack.config";
+
+//* Import GraphQL schema
+import schema from "./schema/schema";
 
 //* The server
 const app: Express = express();
@@ -58,6 +64,31 @@ mongoose
     console.log(`MongoDB Database connected with HOST: ${con.connection.host}`);
   })
   .catch((error: string) => console.log("Mongo DB Error => ", error));
+
+app.use(
+  session({
+    resave: true,
+    saveUninitialized: true,
+    secret: process.env.SESSION_SECRET as string,
+    store: MongoStore.create({
+      mongoUrl: process.env.MONGO_URL as string,
+      autoRemove: "native",
+    }),
+  })
+);
+
+//* Passport
+app.use(passport.initialize());
+app.use(passport.session());
+
+//* GraphQL
+app.use(
+  "/graphql",
+  graphqlHTTP({
+    schema: schema,
+    graphiql: true,
+  })
+);
 
 //* Favicon
 app.get("/favicon.ico", (_req: Request, res: Response) => {
