@@ -4,7 +4,7 @@ import { Request } from "express";
 import UserType from "./user_type";
 import { signup } from "../services/auth";
 
-const mutation: GraphQLObjectType = new GraphQLObjectType({
+const mutations: GraphQLObjectType = new GraphQLObjectType({
   name: "Mutation",
   fields: {
     signup: {
@@ -20,4 +20,4 @@ const mutation: GraphQLObjectType = new GraphQLObjectType({
   },
 });
 
-export default mutation;
+export default mutations;

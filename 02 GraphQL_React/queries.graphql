@@ -1,6 +1,11 @@
 #@ GraphQL ID - capital letters1
 
 #* Part Three
+mutation {
+  signup(email: process.env.EMAIL, password: process.env.PASSWORD) {
+    email
+  }
+}
 
 #* Part One
 query {
