@@ -11,6 +11,7 @@ import App from "./App";
 import LoginForm from "./components/LoginForm";
 import SignupForm from "./components/SignupForm";
 import Dashboard from "./components/Dashboard";
+import RequireAuth from "./components/RequireAuth";
 
 if (module.hot) {
   module.hot.accept();
@@ -32,7 +33,7 @@ root.render(
         <Route path="/" component={App}>
           <Route path="login" component={LoginForm} />
           <Route path="signup" component={SignupForm} />
-          <Route path="dashboard" component={Dashboard} />
+          <Route path="dashboard" component={RequireAuth(Dashboard)} />
         </Route>
       </Router>
     </ApolloProvider>
