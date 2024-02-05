@@ -13,7 +13,15 @@ const RequireAuth = (WrappedComponent: React.FC<Props>) => {
     //   }
     // }
 
-    //* V2
+    //* V2 - but better Functional Component!
+    componentDidMount() {
+      const { user } = this.props.data!;
+      if (!user) {
+        // console.log("user:", user);
+        hashHistory.push("/login");
+      }
+    }
+
     componentDidUpdate() {
       const { user } = this.props.data!;
       if (!user) {
@@ -23,7 +31,8 @@ const RequireAuth = (WrappedComponent: React.FC<Props>) => {
     }
 
     render() {
-      return <WrappedComponent {...this.props} />;
+      // return <WrappedComponent {...this.props} />;
+      return <React.Fragment>{this.props.data?.user ? <WrappedComponent {...this.props} /> : null}</React.Fragment>;
     }
   }
 
