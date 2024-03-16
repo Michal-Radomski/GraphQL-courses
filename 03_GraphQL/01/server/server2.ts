@@ -1,24 +1,19 @@
-//* 1. Schema-First Approach
+//* Code-First Approach
 import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
+import { makeSchema, queryType } from "nexus";
 
-const typeDefs = `#graphql
-schema {
-  query:Query
-}
-  type Query {
-    greeting: String
-  }
-`;
-
-const resolvers = {
-  Query: {
-    greeting: () => "Hello world!",
+const Query = queryType({
+  definition: (type) => {
+    type.string("greeting", {
+      resolve: () => "Hello world!",
+    });
   },
-};
+});
 
-const server = new ApolloServer({ typeDefs, resolvers });
-// console.log("server:", server);
+const schema = makeSchema({ types: [Query] });
+
+const server = new ApolloServer({ schema });
 
 (async function startApolloServer() {
   const serverInfo = await startStandaloneServer(server, { listen: { port: 4000 } });

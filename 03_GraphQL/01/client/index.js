@@ -12,6 +12,8 @@ async function fetchGreeting() {
   return data.greeting;
 }
 
-fetchGreeting().then((greeting) => {
-  document.getElementById("greeting").textContent = greeting;
-});
+fetchGreeting()
+  .then((greeting) => {
+    document.getElementById("greeting").textContent = greeting;
+  })
+  .catch((err) => console.log("err:", err));
