@@ -1,4 +1,4 @@
-//* Code-First Approach
+//* 2. Code-First Approach
 import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
 import { makeSchema, queryType } from "nexus";
