@@ -6,6 +6,28 @@ import { countJobs, createJob, deleteJob, getJob, getJobs, getJobsByCompany, upd
 export const resolvers = {
   Query: {
     // greeting: () => "Hello world!",
+    // test: () => {
+    //   return {
+    //     title: "test",
+    //     subtitle: "subtitle",
+    //   };
+    // },
+    jobs: async (_root: any, { limit, offset }: { limit: number; offset: number }) => {
+      // console.log("_root:", _root);
+      const items = await getJobs(limit, offset);
+      // console.log("items:", items);
+      const totalCount = await countJobs();
+      return { items, totalCount };
+    },
+
+    job: async (_root: any, { id }: { id: string }) => {
+      const job = await getJob(id);
+      // console.log("job:", job);
+      if (!job) {
+        throw notFoundError("No Job found with id " + id);
+      }
+      return job;
+    },
 
     company: async (_root: any, { id }: { id: string }) => {
       const company = await getCompany(id);
@@ -13,18 +35,6 @@ export const resolvers = {
         throw notFoundError("No Company found with id " + id);
       }
       return company;
-    },
-    job: async (_root: any, { id }: { id: string }) => {
-      const job = await getJob(id);
-      if (!job) {
-        throw notFoundError("No Job found with id " + id);
-      }
-      return job;
-    },
-    jobs: async (_root: any, { limit, offset }: { limit: number; offset: number }) => {
-      const items = await getJobs(limit, offset);
-      const totalCount = await countJobs();
-      return { items, totalCount };
     },
   },
 
@@ -91,6 +101,7 @@ function unauthorizedError(message: string) {
   });
 }
 
+//* Get Date
 function toIsoDate(value: string) {
   return value.slice(0, "yyyy-mm-dd".length);
 }

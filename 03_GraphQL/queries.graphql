@@ -1,0 +1,28 @@
+query {
+  greeting
+}
+
+query {
+  test {
+    title
+    subtitle
+  }
+}
+
+query {
+  # one job
+  job {
+    id
+    title
+    description
+  }
+}
+
+query {
+  # array of jobs
+  jobs {
+    id
+    title
+    description
+  }
+}
