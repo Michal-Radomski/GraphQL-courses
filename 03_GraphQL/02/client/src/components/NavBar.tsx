@@ -1,7 +1,7 @@
-import { Link } from 'react-router-dom';
-import { logout } from '../lib/auth';
+import { Link } from "react-router-dom";
+import { logout } from "../lib/auth";
 
-function NavBar({ user, onLogout }) {
+function NavBar({ user, onLogout }: { user: User; onLogout: Function }): JSX.Element {
   const handleLogout = () => {
     logout();
     onLogout();
@@ -17,9 +17,7 @@ function NavBar({ user, onLogout }) {
       </div>
       {loggedIn ? (
         <div className="navbar-end">
-          <span className="navbar-item has-text-grey">
-            {user.email}
-          </span>
+          <span className="navbar-item has-text-grey">{user.email}</span>
           <Link className="navbar-item" to="/jobs/new">
             Post Job
           </Link>
