@@ -19,7 +19,8 @@ interface CustomRequest extends Request {
   auth: { sub: string };
 }
 
-const httpPort = 4000;
+// Port
+const httpPort = (process.env.PORT || 4000) as number;
 
 // The server
 const app: Express = express();
@@ -41,6 +42,7 @@ app.post("/login", handleLogin);
 async function getContext({ req }: { req: CustomRequest }) {
   const companyLoader = createCompanyLoader();
   const context = { companyLoader };
+  // console.log("context:", context);
   if (req.auth) {
     (context as any).user = await getUser(req.auth.sub);
   }
@@ -49,23 +51,18 @@ async function getContext({ req }: { req: CustomRequest }) {
 
 (async function () {
   const typeDefs = await readFile("./schema.graphql", "utf8");
+  // console.log("typeDefs:", typeDefs);
 
   const apolloServer = await new ApolloServer({ typeDefs, resolvers });
   await apolloServer.start();
   app.use("/graphql", apolloMiddleware(apolloServer, { context: getContext as any }));
 
-  //* Test route
-  // app.get("/", (req: Request, res: Response) => {
-  //   console.log("req.ip:", req.ip);
-  //   res.send("<h1 style='color:blue;text-align:center'>API is running</h1>");
-  // });
-
   const httpServer = http.createServer(app);
   httpServer.listen({ port: httpPort }, () => {
     console.log(`Server is listening at http://localhost:${httpPort}`);
-    // For testing only
-    console.log("Current Time:", new Date().toLocaleTimeString());
     console.log(`Server running on port ${httpPort}`);
     console.log(`GraphQL endpoint: http://localhost:${httpPort}/graphql`);
+    // For testing only
+    console.log("Current Time:", new Date().toLocaleTimeString());
   });
 })();

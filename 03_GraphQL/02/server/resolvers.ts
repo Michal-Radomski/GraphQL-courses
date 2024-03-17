@@ -5,6 +5,8 @@ import { countJobs, createJob, deleteJob, getJob, getJobs, getJobsByCompany, upd
 
 export const resolvers = {
   Query: {
+    // greeting: () => "Hello world!",
+
     company: async (_root: any, { id }: { id: string }) => {
       const company = await getCompany(id);
       if (!company) {
