@@ -5,6 +5,7 @@ const getJobTable = () => connection.table("job");
 
 export async function countJobs() {
   const { count } = (await getJobTable().first().count("* as count")) as any;
+  // console.log("count:", count);
   return count;
 }
 

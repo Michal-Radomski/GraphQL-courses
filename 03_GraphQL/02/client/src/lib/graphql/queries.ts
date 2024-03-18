@@ -1,5 +1,23 @@
 import { ApolloClient, ApolloLink, concat, createHttpLink, gql, InMemoryCache } from "@apollo/client";
 import { getAccessToken } from "../auth";
+// import { GraphQLClient, gql as gql2 } from "graphql-request";
+
+// const client = new GraphQLClient("http://localhost:4000/graphql/");
+// const getData = async () => {
+//   const query = gql2`
+//     query {
+//       test {
+//         title
+//         subtitle
+//       }
+//     }
+//   `;
+//   const data = await client.request(query);
+//   return data;
+// };
+// getData()
+//   .then((res) => console.log(res))
+//   .catch((err) => console.log(err));
 
 const httpLink = createHttpLink({ uri: "http://localhost:4000/graphql" });
 
