@@ -1,3 +1,4 @@
+#* Convention Name: nouns!
 type Query {
   # greeting: String
   # test: Test
@@ -23,12 +24,14 @@ type Job {
   description: String
 }
 
+#* Convention Name: verbs!
 type Mutation {
   createJob(input: CreateJobInput!): Job
   deleteJob(id: ID!): Job
   updateJob(input: UpdateJobInput!): Job
 }
 
+#* Convention Output
 type Company {
   id: ID!
   name: String!
@@ -36,16 +39,19 @@ type Company {
   jobs: [Job!]!
 }
 
+#* Convention Output
 type JobSubList {
   items: [Job!]! # Non-nullable array of non-nullable job objects
   totalCount: Int!
 }
 
+#* Convention Input
 input CreateJobInput {
   title: String!
   description: String
 }
 
+#* Convention Input
 input UpdateJobInput {
   id: ID!
   title: String!
