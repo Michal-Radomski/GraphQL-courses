@@ -1,10 +1,21 @@
-import { ApolloClient, ApolloLink, concat, createHttpLink, gql, InMemoryCache } from "@apollo/client";
-import { getAccessToken } from "../auth";
+import {
+  ApolloClient,
+  ApolloLink,
+  concat,
+  createHttpLink,
+  DocumentNode,
+  gql,
+  InMemoryCache,
+  NextLink,
+  Operation,
+} from "@apollo/client";
 // import { GraphQLClient, gql as gql2 } from "graphql-request";
+
+import { getAccessToken } from "../auth";
 
 // const client = new GraphQLClient("http://localhost:4000/graphql/");
 // const getData = async () => {
-//   const query = gql2`
+//   const query:string = gql2`
 //     query {
 //       test {
 //         title
@@ -21,7 +32,7 @@ import { getAccessToken } from "../auth";
 
 const httpLink = createHttpLink({ uri: "http://localhost:4000/graphql" });
 
-const authLink = new ApolloLink((operation, forward) => {
+const authLink = new ApolloLink((operation: Operation, forward: NextLink) => {
   const accessToken = getAccessToken();
   if (accessToken) {
     operation.setContext({
@@ -33,10 +44,11 @@ const authLink = new ApolloLink((operation, forward) => {
 
 export const apolloClient = new ApolloClient({
   link: concat(authLink, httpLink),
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache({}),
+  defaultOptions: { query: { fetchPolicy: "network-only" }, watchQuery: { fetchPolicy: "network-only" } },
 });
 
-const jobDetailFragment = gql`
+const jobDetailFragment: DocumentNode = gql`
   fragment JobDetail on Job {
     id
     date
@@ -49,7 +61,7 @@ const jobDetailFragment = gql`
   }
 `;
 
-export const companyByIdQuery = gql`
+export const companyByIdQuery: DocumentNode = gql`
   query CompanyById($id: ID!) {
     company(id: $id) {
       id
@@ -64,7 +76,7 @@ export const companyByIdQuery = gql`
   }
 `;
 
-export const jobByIdQuery = gql`
+export const jobByIdQuery: DocumentNode = gql`
   query JobById($id: ID!) {
     job(id: $id) {
       ...JobDetail
@@ -73,7 +85,7 @@ export const jobByIdQuery = gql`
   ${jobDetailFragment}
 `;
 
-export const jobsQuery = gql`
+export const jobsQuery: DocumentNode = gql`
   query Jobs($limit: Int, $offset: Int) {
     jobs(limit: $limit, offset: $offset) {
       items {
@@ -90,7 +102,7 @@ export const jobsQuery = gql`
   }
 `;
 
-export const createJobMutation = gql`
+export const createJobMutation: DocumentNode = gql`
   mutation CreateJob($input: CreateJobInput!) {
     job: createJob(input: $input) {
       ...JobDetail
