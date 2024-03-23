@@ -19,7 +19,7 @@ export function useJob(id: string) {
 export function useJobs(limit: number, offset: number) {
   const { data, loading, error } = useQuery(jobsQuery, {
     variables: { limit, offset },
-    fetchPolicy: "network-only", //* other possibility: "cache-first"
+    fetchPolicy: "network-only", //* Other possibility: "cache-first"
   });
   return { jobs: data?.jobs, loading, error: Boolean(error) };
 }

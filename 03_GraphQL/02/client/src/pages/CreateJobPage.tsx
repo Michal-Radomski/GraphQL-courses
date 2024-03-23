@@ -9,7 +9,7 @@ function CreateJobPage(): JSX.Element {
   const [description, setDescription] = React.useState<string>("");
   const { createJob, loading } = useCreateJob();
 
-  const handleSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleSubmit = async (event: React.MouseEvent<HTMLButtonElement>): Promise<void> => {
     event.preventDefault();
     const job = await createJob(title, description);
     console.log("job created:", job);

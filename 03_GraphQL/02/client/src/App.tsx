@@ -16,12 +16,12 @@ const App = (): JSX.Element => {
   const navigate = useNavigate();
   const [user, setUser] = React.useState<User | null>(getUser);
 
-  const handleLogin = (user: User) => {
+  const handleLogin = (user: User):void => {
     setUser(user);
     navigate("/");
   };
 
-  const handleLogout = () => {
+  const handleLogout = ():void => {
     setUser(null);
     navigate("/");
   };
