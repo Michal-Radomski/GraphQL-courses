@@ -16,7 +16,7 @@ export function useJob(id: string) {
   return { job: data?.job, loading, error: Boolean(error) };
 }
 
-export function useJobs(limit: number, offset: number) {
+export function useJobs(limit?: number, offset?: number) {
   const { data, loading, error } = useQuery(jobsQuery, {
     variables: { limit, offset },
     fetchPolicy: "network-only", //* Other possibility: "cache-first"
