@@ -6,6 +6,7 @@ export function useAddMessage() {
   const [mutate] = useMutation(addMessageMutation);
 
   const addMessage = async (text: string) => {
+    // console.log({ text });
     const {
       data: { message },
     } = await mutate({

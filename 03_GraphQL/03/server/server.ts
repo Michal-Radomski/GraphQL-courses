@@ -15,6 +15,7 @@ import helmet from "helmet";
 
 import { authMiddleware, decodeToken, handleLogin } from "./auth";
 import { resolvers } from "./resolvers";
+import { GraphQLSchema } from "graphql";
 
 interface CustomRequest extends Request {
   auth: { sub: string };
@@ -60,9 +61,9 @@ function getWsContext({ connectionParams }: { connectionParams: { accessToken: s
   const typeDefs = await readFile("./schema.graphql", "utf8");
   // console.log("typeDefs:", typeDefs);
 
-  const schema = makeExecutableSchema({ typeDefs, resolvers });
+  const schema: GraphQLSchema = makeExecutableSchema({ typeDefs, resolvers });
 
-  const apolloServer = await new ApolloServer({ typeDefs });
+  const apolloServer = await new ApolloServer({ schema });
   await apolloServer.start();
   app.use(
     "/graphql",

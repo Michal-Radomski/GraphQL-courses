@@ -1,8 +1,10 @@
 import { GraphQLError } from "graphql";
 import { PubSub } from "graphql-subscriptions";
+
 import { createMessage, getMessages } from "./db/messages";
 
 const pubSub = new PubSub();
+// console.log("pubSub:", pubSub);
 
 export const resolvers = {
   Query: {
