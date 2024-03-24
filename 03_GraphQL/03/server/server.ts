@@ -52,6 +52,7 @@ function getWsContext({ connectionParams }: { connectionParams: { accessToken: s
   const accessToken = connectionParams?.accessToken;
   if (accessToken) {
     const payload = decodeToken(accessToken);
+    // console.log("payload:", payload);
     return { user: payload.sub };
   }
   return {};
