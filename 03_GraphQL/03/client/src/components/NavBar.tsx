@@ -1,15 +1,13 @@
-function NavBar({ user, onLogout }) {
+function NavBar({ user, onLogout }: { user: string | null | undefined; onLogout: Function }): JSX.Element {
   return (
     <nav className="navbar">
       <div className="navbar-brand">
-        <p className="navbar-item is-size-5 has-text-weight-bold">
-          GraphQL Chat
-        </p>
+        <p className="navbar-item is-size-5 has-text-weight-bold">GraphQL Chat</p>
       </div>
       <div className="navbar-end">
         {Boolean(user) && (
           <div className="navbar-item">
-            <button className="button is-link" onClick={onLogout}>
+            <button className="button is-link" onClick={() => onLogout()}>
               Logout
             </button>
           </div>
