@@ -9,6 +9,14 @@ query {
   }
 }
 
+#* The same but with the of the query
+query testQuery {
+  test {
+    title
+    subtitle
+  }
+}
+
 query {
   # one job
   job {
