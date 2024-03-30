@@ -9,7 +9,7 @@ query {
   }
 }
 
-#* The same but with the of the query
+#* The same but with the name of the query (good practice)
 query testQuery {
   test {
     title
